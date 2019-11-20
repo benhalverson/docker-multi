@@ -1,6 +1,6 @@
 FROM node:13.1.0-alpine
 
-WORKDIR /app
+WORKDIR /client
 
 COPY package.json .
 RUN npm i
