@@ -12,17 +12,17 @@ script:
   - docker run -e CI=true benhalverson/docker-multi npm run test
 
 after_success: 
-  - docker build -t benhalverson/multi-client ./client
-  - docker build -t benhalverson/multi-nginx ./nginx
-  - docker build -t benhalverson/multi-server ./server
-  - docker build -t benhalverson/multi-worker ./worker
+  - docker build -t benhalverson/client ./client
+  - docker build -t benhalverson/nginx ./nginx
+  - docker build -t benhalverson/server ./server
+  - docker build -t benhalverson/worker ./worker
   # login to docker-cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push to docker hub
-  - docker push benhalverson/multi-client
-  - docker push benhalverson/multi-nginx
-  - docker push benhalverson/multi-server
-  - docker push benhalverson/multi-worker
+  - docker push benhalverson/client
+  - docker push benhalverson/nginx
+  - docker push benhalverson/server
+  - docker push benhalverson/worker
 
 # deploy:
 #   provider: elasticbeanstalk
