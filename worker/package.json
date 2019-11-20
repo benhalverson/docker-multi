@@ -12,7 +12,7 @@
   "author": "Ben Halverson <benhalverson33@gmail.com> (http://benhalverson.me/)",
   "license": "MIT",
   "dependencies": {
-    "nodemon": "1.19.4",
+    "nodemon": "2.0.0",
     "redis": "2.8.0"
   },
   "devDependencies": {
