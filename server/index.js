@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const redis = require('redis');
 const cors = require('cors');
 const { Pool } = require('pg');
+const keys = require('./keys');
 const app = express();
 
 const pgClient = new Pool({
@@ -13,7 +14,6 @@ const pgClient = new Pool({
 	port: keys.pgPORT
 });
 
-const keys = require('./keys');
 
 app.use(cors());
 app.use(bodyParser.json());
