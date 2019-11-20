@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+  - '12'
+dist: bionic
+services:
+  - docker
+before_install:
+  - docker build -t benhalverson/docker-multi -f ./client/Dockerfile.dev ./client
+cache: 
+    - node_modules
+script:
+  - docker run -e CI=true benhalverson/docker-multi npm run test
+
+after_success: 
+  - docker build -t benhalverson/multi-client ./client
+  - docker build -t benhalverson/multi-nginx ./nginx
+  - docker build -t benhalverson/multi-server ./server
+  - docker build -t benhalverson/multi-worker ./worker
+  # login to docker-cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push to docker hub
+  - docker push benhalverson/multi-client
+  - docker push benhalverson/multi-nginx
+  - docker push benhalverson/multi-server
+  - docker push benhalverson/multi-worker
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "us-west-2"
+#   app: "docker-demo"
+#   env: "DockerDemo-env"
+#   bucket_name: "elasticbeanstalk-us-west-2-811145310164"
+#   bucket_path: "docker-demo"
+#   edge: true
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
