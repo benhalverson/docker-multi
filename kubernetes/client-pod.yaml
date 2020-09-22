@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metaData:
+  name: client-Pod
+  label:
+    component: web
+  spec:
+    containers:
+      - name: client
+        image: benhalverson/client
+        port:
+          - containerPort: 3000

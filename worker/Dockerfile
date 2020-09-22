@@ -1,8 +1,8 @@
-FROM node:13.13.0-alpine
+FROM node:12.18.2
 
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json .
 RUN npm i
 COPY . .
 CMD ["npm", "run", "start"]
